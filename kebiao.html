@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>课程表</title>
+    <link rel="stylesheet" href="css/kebiao.css">
+</head>
+
+<body>
+    <h1>我的课程表</h1>
+    <div class="timetable-container">
+        <!-- 左侧课程列表 -->
+        <div class="course-list" data-drop="move">
+            
+        </div>
+        <!-- 课程表 -->
+        <table class="timetable">
+            <tr>
+                <th class="time"></th>
+                <th>星期一</th>
+                <th>星期二</th>
+                <th>星期三</th>
+                <th>星期四</th>
+                <th>星期五</th>
+                <th>星期六</th>
+                <th>星期日</th>
+            </tr>
+            <tr>
+                <td class="time">
+                    8:20-10:00
+                </td>
+                <td data-drop="copy"></td>
+                <td data-drop="copy"></td>
+                <td data-drop="copy"></td>
+                <td data-drop="copy"></td>
+                <td data-drop="copy"></td>
+                <td data-drop="copy"></td>
+                <td data-drop="copy"></td>
+            </tr>
+            <tr>
+                <td class="time">
+                    10:20~12:20
+                </td>
+                <td data-drop="copy"></td>
+                <td data-drop="copy"></td>
+                <td data-drop="copy"></td>
+                <td data-drop="copy"></td>
+                <td data-drop="copy"></td>
+                <td data-drop="copy"></td>
+                <td data-drop="copy"></td>
+            </tr>
+            <tr>
+                <td class="time">
+                    14:30~16:10
+                </td>
+                <td data-drop="copy"></td>
+                <td data-drop="copy"></td>
+                <td data-drop="copy"></td>
+                <td data-drop="copy"></td>
+                <td data-drop="copy"></td>
+                <td data-drop="copy"></td>
+                <td data-drop="copy"></td>
+            </tr>
+            <tr>
+                <td class="time">
+                    16:30~18:10
+                </td>
+                <td data-drop="copy"></td>
+                <td data-drop="copy"></td>
+                <td data-drop="copy"></td>
+                <td data-drop="copy"></td>
+                <td data-drop="copy"></td>
+                <td data-drop="copy"></td>
+                <td data-drop="copy"></td>
+            </tr>
+        </table>
+    </div>
+    <div class="add-course-container">
+        <input type="text" id="new-course-input" placeholder="输入新课程名称">
+        <button id="add-course-btn">添加课程</button>
+    </div>
+
+    <script>
+        const aList = document.querySelector('.timetable-container');
+        let source;
+
+        // 保存课程表数据到localStorage
+        function saveTimetable() {
+            // 保存课程表数据
+            const timetable = {};
+            const cells = document.querySelectorAll('td[data-drop="copy"]');
+            cells.forEach((cell, index) => {
+                if (cell.children.length > 0) {
+                    timetable[index] = cell.children[0].textContent;
+                }
+            });
+            localStorage.setItem('timetable', JSON.stringify(timetable));
+
+            // 保存左侧课程列表
+            const courseList = [];
+            const courses = document.querySelectorAll('.course-list .course');
+            courses.forEach(course => {
+                courseList.push(course.textContent);
+            });
+            localStorage.setItem('courseList', JSON.stringify(courseList));
+        }
+
+        // 从localStorage恢复数据
+        function loadTimetable() {
+            // 恢复课程表数据
+            const savedData = localStorage.getItem('timetable');
+            if (savedData) {
+                const timetable = JSON.parse(savedData);
+                const cells = document.querySelectorAll('td[data-drop="copy"]');
+                cells.forEach((cell, index) => {
+                    if (timetable[index]) {
+                        const course = document.createElement('div');
+                        course.className = 'course';
+                        course.textContent = timetable[index];
+                        course.setAttribute('data-effect', 'copy');
+                        course.setAttribute('draggable', 'true');
+                        course.setAttribute('data-drop', 'move');
+                        cell.appendChild(course);
+                    }
+                });
+            }
+
+            // 恢复左侧课程列表
+            const savedCourses = localStorage.getItem('courseList');
+            if (savedCourses) {
+                const courseList = JSON.parse(savedCourses);
+                const courseListContainer = document.querySelector('.course-list');
+                courseListContainer.innerHTML = ''; // 清空现有课程
+                courseList.forEach(courseName => {
+                    const course = document.createElement('div');
+                    course.className = 'course';
+                    course.textContent = courseName;
+                    course.setAttribute('data-effect', 'copy');
+                    course.setAttribute('draggable', 'true');
+                    courseListContainer.appendChild(course);
+                });
+            }
+        }
+
+        // 页面加载时恢复数据
+        document.addEventListener('DOMContentLoaded', loadTimetable);
+
+        function clearDropStyle() {
+            const dropNodes = document.querySelectorAll('.drop-over');
+            dropNodes.forEach(element => {
+                element.classList.remove('drop-over');
+            });
+        }
+
+        function getDropNode(node) {
+            while (node && node.nodeType === 1) {
+                if (node.dataset && node.dataset.drop) {
+                    return node;
+                }
+                node = node.parentNode;
+            }
+            return null;
+        }
+
+        aList.ondragstart = (e) => {
+            e.dataTransfer.effectAllowed = e.target.dataset.effect;
+            source = e.target;
+        }
+
+        aList.ondragover = (e) => {
+            e.preventDefault();
+        }
+
+        aList.ondragenter = (e) => {
+            const dropNode = getDropNode(e.target);
+            if (!dropNode) {
+                return
+            }
+            clearDropStyle();
+            if (e.dataTransfer.effectAllowed === dropNode.dataset.drop) {
+                e.target.classList.add('drop-over');
+            }
+        }
+
+        aList.ondrop = (e) => {
+            clearDropStyle();
+            const dropNode = getDropNode(e.target);
+            console.log(dropNode);
+
+            if (!dropNode) {
+                source.remove();
+                saveTimetable(); // 保存数据
+                return
+            }
+            if (e.dataTransfer.effectAllowed !== dropNode.dataset.drop) {
+                return
+            }
+            if (dropNode.dataset.drop === 'copy') {
+                dropNode.innerHTML = '';
+                const cloned = source.cloneNode(true);
+                cloned.dataset.drop = 'move';
+                dropNode.appendChild(cloned);
+                const parent = source.parentNode;
+                if (parent.nodeName == 'TD') {
+                    parent.removeChild(source);
+                }
+            }
+            else {
+                const parent = source.parentNode;
+                if (parent.nodeName == 'TD') {
+                    parent.removeChild(source);
+                }
+                source.remove()
+            }
+            saveTimetable(); // 保存数据
+        }
+
+        // 插入新的课程
+        const courseList = document.querySelector('.course-list');
+        const addCourseBtn = document.getElementById('add-course-btn');
+        const newCourseInput = document.getElementById('new-course-input');
+
+        addCourseBtn.addEventListener('click', () => {
+            const courseName = newCourseInput.value.trim();
+            if (courseName === '') {
+                alert('请输入课程名称！');
+                return;
+            }
+
+            const newCourse = document.createElement('div');
+            newCourse.className = 'course';
+            newCourse.textContent = courseName;
+            newCourse.setAttribute('data-effect', 'copy');
+            newCourse.setAttribute('draggable', 'true');
+
+            courseList.appendChild(newCourse);
+            newCourseInput.value = '';
+            
+            saveTimetable(); // 保存新添加的课程
+        });
+    </script>
+</body>
+
+</html>

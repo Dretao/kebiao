@@ -1,0 +1,71 @@
+{
+  "courses": [
+    {
+      "id": 3,
+      "name": "操作系统",
+      "teacher_id": 1,
+      "class_id": 1,
+      "week_type": "每周",
+      "schedules": [
+        {
+          "day_of_week": 1,
+          "start_time": "10:20:00",
+          "end_time": "12:20:00",
+          "classroom": "荣茂504"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "name": "python程序设计",
+      "teacher_id": 1,
+      "class_id": 1,
+      "week_type": "双周",
+      "schedules": [
+        {
+          "day_of_week": 1,
+          "start_time": "16:30:00",
+          "end_time": "18:10:00",
+          "classroom": "荣茂504"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "数学建模",
+      "teacher_id": 2,
+      "class_id": 1,
+      "week_type": "每周",
+      "schedules": [
+        {
+          "day_of_week": 3,
+          "start_time": "10:20:00",
+          "end_time": "12:20:00",
+          "classroom": "朝阳409"
+        }
+      ]
+    }
+  ],
+  "teachers": [
+    {
+      "id": 1,
+      "name": "张老师",
+      "email": "zhang@example.com",
+      "password": "123456"
+    },
+    {
+      "id": 2,
+      "name": "李老师",
+      "email": "li@example.com",
+      "password": "123456"
+    }
+  ],
+  "classes": [
+    {
+      "id": 1,
+      "name": "高一(1)班",
+      "grade": "高一"
+    }
+  ],
+  "applications": []
+}

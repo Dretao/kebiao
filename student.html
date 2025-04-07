@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>学生端 - 课程表系统</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>学生课程表</h1>
+        </header>
+        
+        <div class="timetable-container">
+            <div class="course-list" data-drop="move">
+                <!-- 课程列表将通过JavaScript动态加载 -->
+            </div>
+            <table class="timetable">
+                <tr>
+                    <th class="time"></th>
+                    <th>星期一</th>
+                    <th>星期二</th>
+                    <th>星期三</th>
+                    <th>星期四</th>
+                    <th>星期五</th>
+                    <th>星期六</th>
+                    <th>星期日</th>
+                </tr>
+                <tr>
+                    <td class="time">8:20-10:00</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td class="time">10:20-12:20</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td class="time">14:30-16:10</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td class="time">16:30-18:10</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="button-container">
+            <div class="week-selector">
+                <button class="week-btn active" data-week="odd">单周</button>
+                <button class="week-btn" data-week="even">双周</button>
+            </div>
+            <button class="logout-btn">退出登录</button>
+        </div>
+    </div>
+
+    <!-- 课程详情弹窗 -->
+    <div class="modal" id="courseModal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>课程详情</h2>
+            <div class="course-info">
+                <p><strong>课程名称：</strong><span id="courseName"></span></p>
+                <p><strong>任课教师：</strong><span id="teacherName"></span></p>
+                <p><strong>教师邮箱：</strong><span id="teacherEmail"></span></p>
+                <p><strong>上课班级：</strong><span id="className"></span></p>
+                <p><strong>上课时间：</strong><span id="courseTime"></span></p>
+                <p><strong>教室：</strong><span id="classroom"></span></p>
+                <p><strong>单双周：</strong><span id="weekType"></span></p>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/student.js"></script>
+</body>
+</html> 

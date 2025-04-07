@@ -1,0 +1,467 @@
+/* 全局样式 */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Microsoft YaHei', Arial, sans-serif;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* 按钮基础样式 */
+button {
+    font-family: 'Microsoft YaHei', Arial, sans-serif;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    position: relative;
+    overflow: hidden;
+}
+
+button:active {
+    transform: scale(0.98);
+}
+
+button::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    background-image: radial-gradient(circle, #fff 10%, transparent 10.01%);
+    background-repeat: no-repeat;
+    background-position: 50%;
+    transform: scale(10, 10);
+    opacity: 0;
+    transition: transform .5s, opacity 1s;
+}
+
+button:active::after {
+    transform: scale(0, 0);
+    opacity: .3;
+    transition: 0s;
+}
+
+/* 主要按钮样式 */
+.primary-btn {
+    background: linear-gradient(45deg, #2c3e50, #3498db);
+    color: white;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-size: 16px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.primary-btn:hover {
+    background: linear-gradient(45deg, #34495e, #2980b9);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+}
+
+/* 次要按钮样式 */
+.secondary-btn {
+    background: white;
+    color: #2c3e50;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 15px;
+    border: 2px solid #2c3e50;
+}
+
+.secondary-btn:hover {
+    background: #2c3e50;
+    color: white;
+}
+
+/* 危险按钮样式 */
+.danger-btn {
+    background: linear-gradient(45deg, #e74c3c, #c0392b);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 15px;
+}
+
+.danger-btn:hover {
+    background: linear-gradient(45deg, #c0392b, #e74c3c);
+}
+
+/* 登录页面样式 */
+.login-container {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    max-width: 400px;
+    margin: 50px auto;
+}
+
+.role-selector {
+    display: flex;
+    margin-bottom: 20px;
+    background: #f5f7fa;
+    border-radius: 8px;
+    padding: 4px;
+}
+
+.role-btn {
+    flex: 1;
+    padding: 12px;
+    border-radius: 6px;
+    background: transparent;
+    color: #2c3e50;
+    font-size: 15px;
+    border: none;
+}
+
+.role-btn.active {
+    background: linear-gradient(45deg, #2c3e50, #3498db);
+    color: white;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: #2c3e50;
+    font-weight: 500;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+.form-group input:focus {
+    border-color: #3498db;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(52,152,219,0.1);
+}
+
+.login-btn {
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(45deg, #2c3e50, #3498db);
+    color: white;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 500;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.login-btn:hover {
+    background: linear-gradient(45deg, #34495e, #2980b9);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+}
+
+/* 课程表样式 */
+.timetable-container {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    margin-top: 20px;
+}
+
+.timetable {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.timetable th, .timetable td {
+    border: 1px solid #e0e0e0;
+    padding: 12px;
+    text-align: center;
+}
+
+.timetable th {
+    background: linear-gradient(45deg, #2c3e50, #3498db);
+    color: white;
+    font-weight: 500;
+}
+
+.course {
+    background: linear-gradient(45deg, #f8f9fa, #e9ecef);
+    padding: 8px 12px;
+    border-radius: 6px;
+    margin: 2px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: #2c3e50;
+}
+
+.course:hover {
+    background: linear-gradient(45deg, #e9ecef, #dee2e6);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+/* 弹窗样式 */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    z-index: 1000;
+    backdrop-filter: blur(5px);
+}
+
+.modal-content {
+    background: white;
+    width: 90%;
+    max-width: 500px;
+    margin: 50px auto;
+    padding: 25px;
+    border-radius: 15px;
+    position: relative;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.close {
+    position: absolute;
+    right: 20px;
+    top: 15px;
+    font-size: 24px;
+    cursor: pointer;
+    color: #2c3e50;
+    transition: all 0.3s ease;
+}
+
+.close:hover {
+    color: #e74c3c;
+    transform: rotate(90deg);
+}
+
+/* 教师端样式 */
+.teacher-container {
+    display: flex;
+    gap: 20px;
+}
+
+.course-management {
+    flex: 1;
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.1);
+}
+
+.add-course-btn {
+    margin: 15px 0;
+    padding: 12px 24px;
+    background: linear-gradient(45deg, #2c3e50, #3498db);
+    color: white;
+    border-radius: 8px;
+    font-size: 15px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.add-course-btn:hover {
+    background: linear-gradient(45deg, #34495e, #2980b9);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+}
+
+.submit-btn {
+    background: linear-gradient(45deg, #2c3e50, #3498db);
+    color: white;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-size: 15px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.submit-btn:hover {
+    background: linear-gradient(45deg, #34495e, #2980b9);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+}
+
+.delete-btn {
+    background: linear-gradient(45deg, #e74c3c, #c0392b);
+    color: white;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-size: 15px;
+    margin-left: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.delete-btn:hover {
+    background: linear-gradient(45deg, #c0392b, #e74c3c);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+}
+
+.logout-btn {
+    background: transparent;
+    color: #2c3e50;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 15px;
+    border: 2px solid #2c3e50;
+    margin-left: 15px;
+}
+
+.logout-btn:hover {
+    background: #2c3e50;
+    color: white;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .teacher-container {
+        flex-direction: column;
+    }
+    
+    .timetable-container {
+        overflow-x: auto;
+    }
+    
+    .modal-content {
+        width: 95%;
+        margin: 20px auto;
+    }
+    
+    .form-buttons {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .delete-btn {
+        margin-left: 0;
+    }
+}
+
+/* 消息提示样式 */
+.error-message, .success-message {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 15px 25px;
+    border-radius: 8px;
+    color: white;
+    font-weight: 500;
+    z-index: 2000;
+    animation: slideIn 0.3s ease-out;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+.error-message {
+    background: linear-gradient(45deg, #e74c3c, #c0392b);
+}
+
+.success-message {
+    background: linear-gradient(45deg, #2ecc71, #27ae60);
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* 无课程提示 */
+.no-courses {
+    text-align: center;
+    color: #7f8c8d;
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    margin: 10px 0;
+}
+
+/* 按钮容器样式 */
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background: white;
+    border-radius: 15px;
+    margin-top: 20px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.1);
+}
+
+.week-selector {
+    display: flex;
+    gap: 10px;
+}
+
+.week-btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    background: #f8f9fa;
+    color: #2c3e50;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.week-btn.active {
+    background: linear-gradient(45deg, #2c3e50, #3498db);
+    color: white;
+}
+
+.week-btn:hover {
+    background: #e9ecef;
+}
+
+.week-btn.active:hover {
+    background: linear-gradient(45deg, #34495e, #2980b9);
+}
+
+.add-course-btn, .logout-btn {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    font-size: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.add-course-btn {
+    background: linear-gradient(45deg, #2c3e50, #3498db);
+    color: white;
+}
+
+.logout-btn {
+    background: linear-gradient(45deg, #e74c3c, #c0392b);
+    color: white;
+}
+
+.add-course-btn:hover {
+    background: linear-gradient(45deg, #34495e, #2980b9);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+}
+
+.logout-btn:hover {
+    background: linear-gradient(45deg, #c0392b, #a93226);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+} 

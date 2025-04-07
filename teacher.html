@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>教师端 - 课程表系统</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>教师课程管理</h1>
+        </header>
+
+        <div class="teacher-container">
+            <div class="course-management">
+                <h2>我的课程</h2>
+                <div class="course-list">
+                    <!-- 课程列表将通过JavaScript动态加载 -->
+                </div>
+            </div>
+
+            <div class="timetable-container">
+                <table class="timetable">
+                    <tr>
+                        <th class="time"></th>
+                        <th>星期一</th>
+                        <th>星期二</th>
+                        <th>星期三</th>
+                        <th>星期四</th>
+                        <th>星期五</th>
+                        <th>星期六</th>
+                        <th>星期日</th>
+                    </tr>
+                    <tr>
+                        <td class="time">8:20-10:00</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td class="time">10:20-12:20</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td class="time">14:30-16:10</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td class="time">16:30-18:10</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="button-container">
+            <button class="add-course-btn">添加课程</button>
+            <button class="logout-btn">退出登录</button>
+        </div>
+    </div>
+
+    <!-- 添加/修改课程弹窗 -->
+    <div class="modal" id="courseModal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2 id="modalTitle">添加课程</h2>
+            <form id="courseForm">
+                <input type="hidden" id="courseId">
+                <div class="form-group">
+                    <label for="courseName">课程名称</label>
+                    <input type="text" id="courseName" required>
+                </div>
+                <div class="form-group">
+                    <label for="classId">班级</label>
+                    <select id="classId" required>
+                        <option value="1">高一(1)班</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="weekType">上课周期</label>
+                    <select id="weekType" required>
+                        <option value="每周">每周</option>
+                        <option value="单周">单周</option>
+                        <option value="双周">双周</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="day_of_week">上课日期</label>
+                    <select id="day_of_week" required>
+                        <option value="1">星期一</option>
+                        <option value="2">星期二</option>
+                        <option value="3">星期三</option>
+                        <option value="4">星期四</option>
+                        <option value="5">星期五</option>
+                        <option value="6">星期六</option>
+                        <option value="7">星期日</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="start_time">上课时间</label>
+                    <select id="start_time" required>
+                        <option value="08:20:00">8:20-10:00</option>
+                        <option value="10:20:00">10:20-12:20</option>
+                        <option value="14:30:00">14:30-16:10</option>
+                        <option value="16:30:00">16:30-18:10</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="classroom">教室</label>
+                    <input type="text" id="classroom" required>
+                </div>
+                <div class="form-buttons">
+                    <button type="submit" class="submit-btn">保存</button>
+                    <button type="button" class="delete-btn" style="display: none;">删除</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- 调课申请弹窗 -->
+    <div class="modal" id="changeModal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>调课申请</h2>
+            <form id="changeForm">
+                <div class="form-group">
+                    <label for="changeCourseId">课程</label>
+                    <select id="changeCourseId" required>
+                        <!-- 课程选项将通过JavaScript动态加载 -->
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="newDay">新上课日期</label>
+                    <select id="newDay" required>
+                        <option value="1">星期一</option>
+                        <option value="2">星期二</option>
+                        <option value="3">星期三</option>
+                        <option value="4">星期四</option>
+                        <option value="5">星期五</option>
+                        <option value="6">星期六</option>
+                        <option value="7">星期日</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="newTime">新上课时间</label>
+                    <select id="newTime" required>
+                        <option value="08:20:00">8:20-10:00</option>
+                        <option value="10:20:00">10:20-12:20</option>
+                        <option value="14:30:00">14:30-16:10</option>
+                        <option value="16:30:00">16:30-18:10</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="newClassroom">新教室</label>
+                    <input type="text" id="newClassroom" required>
+                </div>
+                <button type="submit" class="submit-btn">提交申请</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/teacher.js"></script>
+</body>
+</html> 
